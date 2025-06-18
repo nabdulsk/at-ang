@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@./accounts": ["libs/accounts/src/index.ts"],
+      "@./shared": ["libs/shared/src/index.ts"],
+      "@./transactions": ["libs/transactions/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

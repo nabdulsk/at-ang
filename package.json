@@ -2,7 +2,18 @@
   "name": "@./source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "serve:libs": "nx run-many --target=serve --all --projects=$(nx show projects --type=lib | tr '\\n' ',')",
+    "build:libs": "nx run-many --target=build --all --projects=$(nx show projects --type=lib | tr '\\n' ',')",
+    "serve:app-business": "nx serve app-business",
+    "serve:app-retail": "nx serve app-retail",
+    "test:libs": "nx run-many --target=test --all --projects=$(nx show projects --type=lib | tr '\\n' ',')",
+    "test:affected": "nx affected --target=test",
+    "test:affected:libs": "nx affected --target=test --type=lib"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",
