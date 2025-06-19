@@ -7,6 +7,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    { provide: ACCOUNTS_JOURNEY_CONFIG_TOKEN, useValue: { paginationSize: 20, showFavourites: false } },
+    {
+      provide: ACCOUNTS_JOURNEY_CONFIG_TOKEN,
+      useValue: {
+        paginationSize: 20,
+        showFavourites: false,
+      },
+    },
   ],
 };

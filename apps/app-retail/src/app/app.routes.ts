@@ -1,12 +1,18 @@
 import { Route } from '@angular/router';
 import {
-    ACCOUNTS_CONFIG_RETAIL
+    ACCOUNTS_CONFIG_RETAIL,
+    accountsRoutes
 } from '@accounts';
 
 export const appRoutes: Route[] = [
     {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'accounts'
+    },
+    {
         path: 'accounts',
-        loadComponent: () => import('@accounts').then(m => m.AccountsComponent),
+        children: accountsRoutes,
         data: { config: ACCOUNTS_CONFIG_RETAIL }
     }
 ];

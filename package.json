@@ -12,7 +12,9 @@
     "serve:app-retail": "nx serve app-retail",
     "test:libs": "nx run-many --target=test --all --projects=$(nx show projects --type=lib | tr '\\n' ',')",
     "test:affected": "nx affected --target=test",
-    "test:affected:libs": "nx affected --target=test --type=lib"
+    "test:affected:libs": "nx affected --target=test --type=lib",
+    "format": "nx format:write",
+    "lint": "nx lint"
   },
   "private": true,
   "dependencies": {
