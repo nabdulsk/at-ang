@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
-import { AppComponent } from './app.component';
+import {
+    ACCOUNTS_CONFIG_BUSINESS,
+} from '@accounts';
 
 export const appRoutes: Route[] = [
     {
@@ -9,14 +11,14 @@ export const appRoutes: Route[] = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'business-accounts'
+                redirectTo: 'accounts'
             },
             {
-                path: 'business-accounts',
+                path: 'accounts',
                 loadComponent: () =>
-                    import('@accounts').then(m => m.AccountsComponent)
+                    import('@accounts').then(m => m.AccountsComponent),
+                data: { config: ACCOUNTS_CONFIG_BUSINESS }
             }
         ]
     }
-
 ];

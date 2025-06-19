@@ -1,1 +1,12 @@
-<p>Accounts works!</p>
+@if (config.showBlueBanner) {
+<div class="blue-banner">Blue Banner</div>
+}
+@if (config.showSearch) {
+<input type="text" placeholder="Search..." />
+}
+@if (config.showPagination) {
+<div class="pagination">Pagination Controls</div>
+}
+@if (config.showOverviewPane) {
+<div class="overview-pane">Overview Pane</div>
+}
