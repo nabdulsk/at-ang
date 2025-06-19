@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import {
   ACCOUNTS_CONFIG_COMMERCIAL,
   ACCOUNTS_CONFIG_BUSINESS,
@@ -15,7 +14,7 @@ const ACCOUNTS_CONFIG_MAP: Record<string, AccountsConfig> = {
 };
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
