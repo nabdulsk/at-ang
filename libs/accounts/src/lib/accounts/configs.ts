@@ -6,8 +6,8 @@ export const ACCOUNTS_SEGMENT_CONFIGS: Record<AccountsSegment, AccountsSegmentCo
   commercial: {
     accounts: {
       showSearch: true,
-      showPagination: false,
-      showHeirarchy: false,
+      showPagination: true,
+      showHeirarchy: true,
       showFilters: false,
       showCurrencyBreakDown: false,
       showViewToggle: false,
@@ -30,8 +30,8 @@ export const ACCOUNTS_SEGMENT_CONFIGS: Record<AccountsSegment, AccountsSegmentCo
       showSearch: true,
       showPagination: true,
       showHeirarchy: false,
-      showFilters: false,
-      showCurrencyBreakDown: false,
+      showFilters: true,
+      showCurrencyBreakDown: true,
       showViewToggle: false,
       listType: AccountsViewType.List
     },
@@ -64,7 +64,7 @@ export const ACCOUNTS_SEGMENT_CONFIGS: Record<AccountsSegment, AccountsSegmentCo
       showFavouriteIcon: true
     },
     layout: {
-      showBlueBanner: true,
+      showBlueBanner: false,
       totalBalanceLabel: 'Total balance',
       showSortByDefault: true
     }
