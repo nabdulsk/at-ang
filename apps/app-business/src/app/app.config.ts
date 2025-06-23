@@ -1,7 +1,8 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { ACCOUNTS_JOURNEY_CONFIG_TOKEN, ACCOUNTS_SEGMENT_CONFIGS } from '@accounts';
+
 import { appRoutes } from './app.routes';
-import { ACCOUNTS_JOURNEY_CONFIG_TOKEN } from '@accounts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -9,10 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     {
       provide: ACCOUNTS_JOURNEY_CONFIG_TOKEN,
-      useValue: {
-        paginationSize: 20,
-        showFavourites: false,
-      },
+      useValue: ACCOUNTS_SEGMENT_CONFIGS['business'].journey,
     },
   ],
 };

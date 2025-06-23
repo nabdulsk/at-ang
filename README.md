@@ -1,15 +1,53 @@
-# 
+# Nx Workspace
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## Table of Contents
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+- [Architecture Overview](#architecture-overview)
+- [Finish your CI setup](#finish-your-ci-setup)
+- [Run tasks](#run-tasks)
+- [Add new projects](#add-new-projects)
+- [Install Nx Console](#install-nx-console)
+- [Useful links](#useful-links)
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+---
+
+## Architecture Overview
+
+### Config-Driven Accounts Feature
+
+This workspace uses a robust, scalable, and maintainable config-driven architecture for the Accounts feature, supporting multiple business segments (Commercial, Business, Retail).
+
+#### Key Decisions
+
+- **Centralized Segment Configs:**
+  - All configuration for each segment is centralized in `ACCOUNTS_SEGMENT_CONFIGS`.
+  - Each segment config contains:
+    - `accounts` (feature config)
+    - `journey` (journey config)
+    - `layout` (layout config)
+  - All configs are strongly typed and easy to extend.
+- **Override Pattern:**
+  - **Feature/UI and Layout configs** are always sourced from `ACCOUNTS_SEGMENT_CONFIGS` and cannot be overridden by the consuming app.
+  - **Journey config** is provided via Angular DI (`ACCOUNTS_JOURNEY_CONFIG_TOKEN`), allowing the app to override it if needed.
+- **App Integration:**
+  - Route data for the accounts feature uses the correct segment's `accounts` config.
+  - The journey config is provided via DI using the correct segment's `journey` config.
+  - This enforces consistency and prevents accidental overrides of feature/layout configs.
+- **Service Refactor:**
+  - `AccountsConfigService` only exposes the journey config via DI, with clear comments explaining the override pattern.
+
+#### Benefits
+
+- **Scalable:** Adding new segments or config types is easy and type-safe.
+- **Maintainable:** All configs are in one place, reducing duplication and confusion.
+- **Clear Boundaries:** Only journey config is overridable, which is enforced by design.
+- **Extensible:** You can add more config types (e.g., permissions, branding) in the future using the same pattern.
+
+---
 
 ## Finish your CI setup
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/5rBBV65SQv)
-
 
 ## Run tasks
 
@@ -39,8 +77,6 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 
 While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 
-Use the plugin's generator to create new projects.
-
 To generate a new application, use:
 
 ```sh
@@ -57,7 +93,6 @@ You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx 
 
 [Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-
 [Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 ## Install Nx Console
@@ -68,14 +103,13 @@ Nx Console is an editor extension that enriches your developer experience. It le
 
 ## Useful links
 
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 And join the Nx community:
+
 - [Discord](https://go.nx.dev/community)
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)

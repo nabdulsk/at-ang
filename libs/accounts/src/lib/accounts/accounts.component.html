@@ -1,12 +1,21 @@
-@if (config.showBlueBanner) {
+@if (layout?.showBlueBanner) {
 <div class="blue-banner">Blue Banner</div>
 }
+
+<div class="accounts-header">
+    {{layout?.totalBalanceLabel}}
+    <h2>{{ layout?.totalBalanceLabel ?? 'Total Balance' }}</h2>
+    @if (layout?.showSortByDefault) {
+    <button>Sort</button>
+    }
+</div>
+
 @if (config.showSearch) {
 <input type="text" placeholder="Search..." />
 }
 @if (config.showPagination) {
 <div class="pagination">Pagination Controls</div>
 }
-@if (config.showOverviewPane) {
-<div class="overview-pane">Overview Pane</div>
+@if (config.showHeirarchy) {
+<div class="overview-pane">Heirarchy Pane</div>
 }

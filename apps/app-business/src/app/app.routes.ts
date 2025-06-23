@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import {
-    ACCOUNTS_CONFIG_BUSINESS,
+    ACCOUNTS_SEGMENT_CONFIGS,
     accountsRoutes
 } from '@accounts';
 
@@ -13,6 +13,6 @@ export const appRoutes: Route[] = [
     {
         path: 'accounts',
         children: accountsRoutes,
-        data: { config: ACCOUNTS_CONFIG_BUSINESS }
+        data: { segment: 'business', config: ACCOUNTS_SEGMENT_CONFIGS['business'].accounts }
     }
 ];

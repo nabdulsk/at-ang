@@ -1,19 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-export interface AccountsConfig {
-  showSearch: boolean;
-  showBlueBanner: boolean;
-  showPagination: boolean;
-  showOverviewPane: boolean;
-}
-
-const defaultConfig: AccountsConfig = {
-  showSearch: true,
-  showBlueBanner: false,
-  showPagination: false,
-  showOverviewPane: false
-};
+import { ACCOUNTS_SEGMENT_CONFIGS, AccountsSegment } from './configs';
+import { AccountsFeatureConfig, AccountsLayoutConfig, DEFAULT_ACCOUNTS_FEATURE_CONFIG } from './accounts-journey-config.service';
 
 @Component({
   selector: 'lib-accounts',
@@ -22,11 +10,19 @@ const defaultConfig: AccountsConfig = {
   styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent {
-  config: AccountsConfig = defaultConfig;
+  config: AccountsFeatureConfig = DEFAULT_ACCOUNTS_FEATURE_CONFIG;
+  layout: AccountsLayoutConfig | undefined;
 
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe(data => {
-      this.config = data['config'] || defaultConfig;
+      const segment = data['segment'] as AccountsSegment;
+
+      if (segment && ACCOUNTS_SEGMENT_CONFIGS[segment]) {
+        this.config = ACCOUNTS_SEGMENT_CONFIGS[segment].accounts;
+        this.layout = ACCOUNTS_SEGMENT_CONFIGS[segment].layout;
+      } else {
+        this.config = DEFAULT_ACCOUNTS_FEATURE_CONFIG;
+      }
     });
   }
 }
