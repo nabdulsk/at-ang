@@ -5,27 +5,24 @@
 }
 <br />
 <div class="accounts-header">
-    <div>{{ layout?.totalBalanceLabel ?? 'Total Balance' }}</div>
-    <br />
+  <div>{{ layout?.totalBalanceLabel ?? 'Total Balance' }}</div>
+  <br />
 
-    @if (layout?.showSortByDefault) {
-    <button>Sort</button>
-    }
+  @if (layout?.showSortByDefault) {
+  <button>Sort</button>
+  }
 </div>
 <br />
 
 @if (config.manageAccounts) {
 <button>Manage Accounts</button>
-}
-@if (config.showFilters) {
+} @if (config.showFilters) {
 <div class="filters-pane">Filters Pane</div>
 <br />
 
-}
-@if (config.showViewToggle) {
+} @if (config.showViewToggle) {
 <button>Toggle View</button>
-}
-@if (config.showCurrencyBreakDown) {
+} @if (config.showCurrencyBreakDown) {
 <div class="currency-breakdown">Currency Breakdown</div>
 }
 <br />
@@ -38,7 +35,6 @@
 @if (config.showPagination) {
 <div class="pagination">Pagination Controls</div>
 <br />
-}
-@if (config.showHeirarchy) {
+} @if (config.showHeirarchy) {
 <div class="overview-pane">Heirarchy Pane</div>
 }

@@ -1,14 +1,6 @@
-import {
-  ViewType,
-  AccountsSegmentConfig,
-} from './accounts-journey-config.service';
-
-export type AccountsSegment = 'commercial' | 'business' | 'retail';
-
-export type ArrangementViewsParam =
-  | 'all'
-  | 'commercial-overview'
-  | 'retail-overview';
+import { AccountsSegmentConfig } from './accounts-journey-config.service';
+import { ViewType } from './accounts-layout-config';
+import { AccountsSegment } from './accounts-route-config';
 
 export const ACCOUNTS_SEGMENT_CONFIGS: Record<
   AccountsSegment,

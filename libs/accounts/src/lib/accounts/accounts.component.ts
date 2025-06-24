@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ACCOUNTS_SEGMENT_CONFIGS, AccountsSegment } from './configs';
+import { ACCOUNTS_SEGMENT_CONFIGS } from './configs';
 import {
   AccountsFeatureConfig,
-  AccountsLayoutConfig,
   DEFAULT_ACCOUNTS_FEATURE_CONFIG,
-} from './accounts-journey-config.service';
+} from './accounts-feature-config';
+import { AccountsLayoutConfig } from './accounts-layout-config';
+import { AccountsSegment } from './accounts-route-config';
 
 @Component({
   selector: 'lib-accounts',

@@ -70,15 +70,15 @@ This workspace uses a robust, scalable, and maintainable config-driven architect
 - **Commercial**
 
   - Table view, blue banner hidden, total label: "Total Liquidity"
-  - Features: search, pagination, hierarchy enabled
-  - Filters/currency breakdown/view toggle/management: disabled
+  - Features: search, pagination, hierarchy, and currency breakdown enabled
+  - Filters, view toggle, and management: disabled
   - API param: `commercial-overview`
 
 - **Business**
 
   - List view, blue banner shown, total label: "Aggregate balances"
   - Features: search, pagination, filters, currency breakdown enabled
-  - Hierarchy/view toggle/management: disabled
+  - Hierarchy, view toggle, and management: disabled
   - API param: `all`
 
 - **Retail**
@@ -86,6 +86,10 @@ This workspace uses a robust, scalable, and maintainable config-driven architect
   - Features: only account management enabled
   - All other features: disabled
   - API param: `retail-overview`
+
+#### Template Structure
+
+The component template uses `<br />` elements for visual separation between logical groups and displays the `totalBalanceLabel` inside a `<div>`. Each feature config property is conditionally rendered for clarity and maintainability.
 
 #### Overriding Journey Config
 

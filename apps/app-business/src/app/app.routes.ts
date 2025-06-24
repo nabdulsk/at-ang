@@ -1,5 +1,5 @@
+import { businessAccountsRoute } from '@accounts';
 import { Route } from '@angular/router';
-import { accountsRoutes } from '@accounts';
 
 export const appRoutes: Route[] = [
   {
@@ -7,9 +7,5 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
     redirectTo: 'accounts',
   },
-  {
-    path: 'accounts',
-    children: accountsRoutes,
-    data: { segment: 'business' },
-  },
+  businessAccountsRoute,
 ];

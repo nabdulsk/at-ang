@@ -8,6 +8,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    { provide: ACCOUNTS_JOURNEY_CONFIG_TOKEN, useValue: ACCOUNTS_SEGMENT_CONFIGS['commercial'].journey },
+    {
+      provide: ACCOUNTS_JOURNEY_CONFIG_TOKEN,
+      useValue: ACCOUNTS_SEGMENT_CONFIGS['commercial'].journey,
+    },
   ],
 };
