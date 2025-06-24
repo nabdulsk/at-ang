@@ -1,19 +1,43 @@
+<br />
+
 @if (layout?.showBlueBanner) {
 <div class="blue-banner">Blue Banner</div>
 }
-
+<br />
 <div class="accounts-header">
-    <h2>{{ layout?.totalBalanceLabel ?? 'Total Balance' }}</h2>
+    <div>{{ layout?.totalBalanceLabel ?? 'Total Balance' }}</div>
+    <br />
+
     @if (layout?.showSortByDefault) {
     <button>Sort</button>
     }
 </div>
+<br />
+
+@if (config.manageAccounts) {
+<button>Manage Accounts</button>
+}
+@if (config.showFilters) {
+<div class="filters-pane">Filters Pane</div>
+<br />
+
+}
+@if (config.showViewToggle) {
+<button>Toggle View</button>
+}
+@if (config.showCurrencyBreakDown) {
+<div class="currency-breakdown">Currency Breakdown</div>
+}
+<br />
 
 @if (config.showSearch) {
 <input type="text" placeholder="Search..." />
+<br />
 }
+<br />
 @if (config.showPagination) {
 <div class="pagination">Pagination Controls</div>
+<br />
 }
 @if (config.showHeirarchy) {
 <div class="overview-pane">Heirarchy Pane</div>

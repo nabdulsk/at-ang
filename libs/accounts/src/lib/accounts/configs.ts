@@ -1,72 +1,89 @@
-import { AccountsViewType, AccountsSegmentConfig } from './accounts-journey-config.service';
+import {
+  ViewType,
+  AccountsSegmentConfig,
+} from './accounts-journey-config.service';
 
 export type AccountsSegment = 'commercial' | 'business' | 'retail';
 
-export const ACCOUNTS_SEGMENT_CONFIGS: Record<AccountsSegment, AccountsSegmentConfig> = {
+export type ArrangementViewsParam =
+  | 'all'
+  | 'commercial-overview'
+  | 'retail-overview';
+
+export const ACCOUNTS_SEGMENT_CONFIGS: Record<
+  AccountsSegment,
+  AccountsSegmentConfig
+> = {
   commercial: {
-    accounts: {
+    feature: {
       showSearch: true,
       showPagination: true,
       showHeirarchy: true,
       showFilters: false,
-      showCurrencyBreakDown: false,
+      showCurrencyBreakDown: true,
       showViewToggle: false,
-      listType: AccountsViewType.List
+      manageAccounts: false,
+      arrangementViewsApiParam: 'commercial-overview',
     },
     journey: {
       paginationSize: 8,
       showCopyButton: true,
       showMaskIcon: true,
-      showFavouriteIcon: true
+      showFavouriteIcon: true,
     },
     layout: {
       showBlueBanner: false,
       totalBalanceLabel: 'Total Liquidity',
-      showSortByDefault: false
-    }
+      showSortByDefault: false,
+      listType: ViewType.Table,
+    },
   },
   business: {
-    accounts: {
+    feature: {
       showSearch: true,
       showPagination: true,
       showHeirarchy: false,
       showFilters: true,
       showCurrencyBreakDown: true,
       showViewToggle: false,
-      listType: AccountsViewType.List
+      manageAccounts: false,
+      arrangementViewsApiParam: 'all',
     },
     journey: {
       paginationSize: 8,
       showCopyButton: true,
       showMaskIcon: true,
-      showFavouriteIcon: true
+      showFavouriteIcon: true,
     },
     layout: {
       showBlueBanner: true,
       totalBalanceLabel: 'Aggregate balances',
-      showSortByDefault: true
-    }
+      showSortByDefault: true,
+      listType: ViewType.List,
+    },
   },
   retail: {
-    accounts: {
+    feature: {
       showSearch: false,
       showPagination: false,
       showHeirarchy: false,
       showFilters: false,
       showCurrencyBreakDown: false,
       showViewToggle: false,
-      listType: AccountsViewType.List
+      manageAccounts: true,
+      arrangementViewsApiParam: 'retail-overview',
     },
     journey: {
       paginationSize: 8,
       showCopyButton: true,
       showMaskIcon: true,
-      showFavouriteIcon: true
+      showFavouriteIcon: true,
     },
     layout: {
       showBlueBanner: false,
       totalBalanceLabel: 'Total balance',
-      showSortByDefault: true
-    }
-  }
-}; 
+      showSortByDefault: true,
+      listType: ViewType.List,
+    },
+  },
+};

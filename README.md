@@ -20,21 +20,100 @@ This workspace uses a robust, scalable, and maintainable config-driven architect
 #### Key Decisions
 
 - **Centralized Segment Configs:**
-  - All configuration for each segment is centralized in `ACCOUNTS_SEGMENT_CONFIGS`.
-  - Each segment config contains:
-    - `accounts` (feature config)
-    - `journey` (journey config)
-    - `layout` (layout config)
-  - All configs are strongly typed and easy to extend.
+  - All configuration for each segment is centralized in `ACCOUNTS_SEGMENT_CONFIGS` (see `libs/accounts/src/lib/accounts/configs.ts`).
+  - Each segment config contains three sections:
+    - `feature` (**feature config**): Feature toggles and API parameters.
+    - `journey` (**journey config**): UI/UX journey options.
+    - `layout` (**layout config**): Layout and display options.
+  - All configs are strongly typed and easy to extend, as defined in `accounts-journey-config.service.ts`.
 - **Override Pattern:**
-  - **Feature/UI and Layout configs** are always sourced from `ACCOUNTS_SEGMENT_CONFIGS` and cannot be overridden by the consuming app.
-  - **Journey config** is provided via Angular DI (`ACCOUNTS_JOURNEY_CONFIG_TOKEN`), allowing the app to override it if needed.
+  - **Feature** and **Layout** configs are always sourced from `ACCOUNTS_SEGMENT_CONFIGS` and cannot be overridden by the consuming app.
+  - **Journey** config is provided via Angular DI (`ACCOUNTS_JOURNEY_CONFIG_TOKEN`), allowing the app to override it if needed.
 - **App Integration:**
-  - Route data for the accounts feature uses the correct segment's `accounts` config.
-  - The journey config is provided via DI using the correct segment's `journey` config.
+  - Route data for the accounts feature uses the correct segment's `feature` config.
+  - The journey config is provided via DI using the correct segment's `journey` config, but can be overridden at the app level.
   - This enforces consistency and prevents accidental overrides of feature/layout configs.
 - **Service Refactor:**
   - `AccountsConfigService` only exposes the journey config via DI, with clear comments explaining the override pattern.
+
+#### Config Structure Example
+
+```
+{
+  feature: {
+    showSearch: boolean,
+    showPagination: boolean,
+    showHeirarchy: boolean,
+    showFilters: boolean,
+    showCurrencyBreakDown: boolean,
+    showViewToggle: boolean,
+    manageAccounts: boolean,
+    arrangementViewsApiParam: 'all' | 'commercial-overview' | 'retail-overview',
+  },
+  journey: {
+    paginationSize: number,
+    showCopyButton: boolean,
+    showMaskIcon: boolean,
+    showFavouriteIcon: boolean,
+  },
+  layout: {
+    showBlueBanner: boolean,
+    totalBalanceLabel: string,
+    showSortByDefault: boolean,
+    listType: 'table' | 'list',
+  }
+}
+```
+
+#### Segment Configurations
+
+- **Commercial**
+
+  - Table view, blue banner hidden, total label: "Total Liquidity"
+  - Features: search, pagination, hierarchy enabled
+  - Filters/currency breakdown/view toggle/management: disabled
+  - API param: `commercial-overview`
+
+- **Business**
+
+  - List view, blue banner shown, total label: "Aggregate balances"
+  - Features: search, pagination, filters, currency breakdown enabled
+  - Hierarchy/view toggle/management: disabled
+  - API param: `all`
+
+- **Retail**
+  - List view, blue banner hidden, total label: "Total balance"
+  - Features: only account management enabled
+  - All other features: disabled
+  - API param: `retail-overview`
+
+#### Overriding Journey Config
+
+The journey config can be overridden at the app or component level using Angular's dependency injection with the `ACCOUNTS_JOURNEY_CONFIG_TOKEN`.
+
+For standalone applications or components, provide the override in the `providers` array:
+
+```
+import { ACCOUNTS_JOURNEY_CONFIG_TOKEN } from './accounts-journey-config.service';
+
+export const APP_PROVIDERS = [
+  {
+    provide: ACCOUNTS_JOURNEY_CONFIG_TOKEN,
+    useValue: { paginationSize: 12 }, // override defaults
+  },
+];
+
+// In your main.ts or bootstrap file:
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    ...APP_PROVIDERS,
+    // other providers
+  ],
+});
+```
 
 #### Benefits
 
